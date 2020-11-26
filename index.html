@@ -61,34 +61,37 @@
                     Link: document.getElementById("Link").value
                 });
         }
-        
         function fetchData(){
           firebase.database().ref().once('value').then(function(snapshot){
                 snapshot.forEach(function(ChildSnapshot){          
                 var tags=ChildSnapshot.key; // EXPERIMENT LATER!!
                 var isi=Object.keys(ChildSnapshot.val());
 
-                        console.log(tags);
-                        console.log(isi);
-                        console.log(ChildSnapshot.val());
+                        // console.log(tags);
+                        // console.log(isi);
+                        // console.log(ChildSnapshot.val());
                         isi.forEach(x => {
-                            console.log(ChildSnapshot.val()[x]);
+                           // console.log(ChildSnapshot.val()[x]);
                             var listsTitle=ChildSnapshot.val()[x].Title;
                             var listsLink=ChildSnapshot.val()[x].Link;
-                            console.log(listsTitle);
-                            console.log(listsLink);
-
+                            // console.log(listsTitle);
+                            // console.log(listsLink);
+                            
                             var ul=document.getElementById('list')
                             var Header=document.createElement('h2')
                             var _Title=document.createElement('li')
-                            var _Link=document.createElement('li')
+                            var hy=document.createElement('li')
+                            
+                            var temp=listsLink;
+                            var temps=temp.link(temp);
 
                             Header.innerHTML=tags;
                             _Title.innerHTML=listsTitle;
-                            _Link.innerHTML=listsLink;
-                            ul.appendChild(Header);
+                            hy.innerHTML=temps;
+                            ul.appendChild(Header); 
                             ul.appendChild(_Title);
-                            ul.appendChild(_Link);
+                            ul.appendChild(hy);
+                            
                         })
                     }
                 );
@@ -104,9 +107,9 @@
     
     <h1>Save ur Precious Links!
     <br>
-    <input type="text" onfocus="this.value=''" placeholder="Title" id="Title">
+    <input type="text" placeholder="Title" id="Title">
     <br>
-    <input type="text" onfocus="this.value=''" placeholder="Link/Code" id="Link">  
+    <input type="text" placeholder="Link/Code" id="Link">  
     <br>    
     <button onClick ="writeDataWh();reOnClick()">Wholesome</button>
     <button onClick ="writeDataNtr();reOnClick()">Ntr</button>
@@ -116,5 +119,7 @@
     </h1>
     <!-- <p>Link: <strong id="linkPrint"></strong></p> -->
     <ul id="list"></ul> <!-- Print all Lists-->
+    
 </body>
 </html>
+
