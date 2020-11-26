@@ -96,6 +96,10 @@
         }
         fetchData();
 
+        function reOnClick(){
+            location.reload();
+        }
+
     </script>
     
     <h1>Save ur Precious Links!
@@ -104,14 +108,13 @@
     <br>
     <input type="text" onfocus="this.value=''" placeholder="Link/Code" id="Link">  
     <br>    
-    <button onClick ="writeDataWh()">Wholesome</button>
-    <button onClick ="writeDataNtr()">Ntr</button>
-    <button onClick ="writeDataGa()">Good Art</button>
-    <button onClick ="writeDataOt()">Others</button>
+    <button onClick ="writeDataWh();reOnClick()">Wholesome</button>
+    <button onClick ="writeDataNtr();reOnClick()">Ntr</button>
+    <button onClick ="writeDataGa();reOnClick()">Good Art</button>
+    <button onClick ="writeDataOt()reOnClick()">Others</button>
     <br>
     </h1>
     <!-- <p>Link: <strong id="linkPrint"></strong></p> -->
     <ul id="list"></ul> <!-- Print all Lists-->
 </body>
 </html>
-
