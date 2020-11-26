@@ -84,7 +84,9 @@
                             
                             var temp=listsLink;
                             var temps=temp.link(temp);
-
+                            if(temp>0&&temp<999999)
+                            var temps=temp.link("https://www.nhentai.net/g/"+temp);
+                            console.log(temps);
                             Header.innerHTML=tags;
                             _Title.innerHTML=listsTitle;
                             hy.innerHTML=temps;
