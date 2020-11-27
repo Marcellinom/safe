@@ -10,7 +10,7 @@
 
     <style>
         h1 {text-align: center;}
-        p1 {text-align: center;}
+        p {text-align: center;}
     </style>
 </head>
 <body>
@@ -102,36 +102,37 @@
     <br>
     <form>
         <p style="font-size:50%;">    
-            <input type="radio" id="check1" value="Wholesome" onclick="cekCheck(this,id)">Wholesome</input>
-            <input type="radio" id="check2" value="Good art" onclick="cekCheck(this,id)">Good Art</input>
-            <input type="radio" id="check3" value="NTR" onclick="cekCheck(this,id)">NTR</input>
-            <input type="radio" id="check4" value="Others" onclick="cekCheck(this,id)">Others</input>
+            <input type="radio" id="check1" name='a' value="Wholesome" onclick="fillTags(id)">Wholesome</input>
+            <input type="radio" id="check2" name='b' value="Good art" onclick="fillTags(id)">Good Art</input>
+            <input type="radio" id="check3" name='c' value="NTR" onclick="fillTags(id)">NTR</input>
+            <input type="radio" id="check4" name='d' value="Others" onclick="fillTags(id)">Others</input>
         </p>
     </form>
+        <button onclick="clearTags()">Clear Tags</button><br>
     <script>
-function cekCheck(checkbox,id){
-var idHold1='';
-var idHold2='';
-var idHold3='';
-var idHold4='';
-var flag=true;
-    if(flag==true && id=='check1'){
-        idHold1=id;
-    }
-    if(flag==true && id=='check2'){
-        idHold2=id;
-    }
-    if(flag==true && id=='check3'){
-        idHold3=id;
-    }
-    if(flag==true && id=='check4'){
-        idHold4=id;
-    }
-var idFix=idHold1+idHold2+idHold3+idHold4;
 
-console.log(idFix);
-    checkboxes(idFix);
-}
+    function fillTags(id){
+    var idHold1='';
+    var idHold2='';
+    var idHold3='';
+    var idHold4='';
+        if(id=='check1'){
+            idHold1=id;
+        }
+        if(id=='check2'){
+            idHold2=id;
+        }
+        if(id=='check3'){
+            idHold3=id;
+        }
+        if(id=='check4'){
+            idHold4=id;
+        }
+    var idFix=idHold1+idHold2+idHold3+idHold4;
+
+    console.log(idFix);
+        checkboxes(idFix);
+    }
 
     let cb="";
     function checkboxes(id){
@@ -150,8 +151,16 @@ console.log(idFix);
         console.log(cb);
     }
     console.log(cb);    //menjadikan judul
+    
+    function clearTags(){
+        document.getElementById("check1").checked=false;
+        document.getElementById("check2").checked=false;
+        document.getElementById("check3").checked=false;
+        document.getElementById("check4").checked=false;
+        cb="";
+    }
     </script>    
-    <button onClick ="writeData(cb);reOnClick()">Submit</button>
+    <button onclick ="writeData(cb);reOnClick()">Submit</button>
     <br>
     </h1>
     <ul id="list"></ul> <!-- Print all Lists-->
