@@ -1,66 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- jQuery Library -->
+    <!-- <script src="jquery-3.5.1.min.js"></script>  -->
+    <!-- jQuery Library -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marsellink</title>
 
     <style>
         h1 {text-align: center;}
+        p1 {text-align: center;}
     </style>
 </head>
 <body>
 
-            <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
 
-    <script>
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-        apiKey: "AIzaSyBW3eNdDOur0AaOIb2t5pFelKoEGjgWOJ4",
-        authDomain: "linksafe-69.firebaseapp.com",
-        databaseURL: "https://linksafe-69.firebaseio.com",
-        projectId: "linksafe-69",
-        storageBucket: "linksafe-69.appspot.com",
-        messagingSenderId: "945067236274",
-        appId: "1:945067236274:web:fb5a4dbfd0e18043e3e2ab",
-        measurementId: "G-ZCWM2H6108"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
+<script>
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDZfAAZDSm52loYB3eHrHbMqb2-mDPPtUU",
+    authDomain: "linksave-e33e3.firebaseapp.com",
+    databaseURL: "https://linksave-e33e3.firebaseio.com",
+    projectId: "linksave-e33e3",
+    storageBucket: "linksave-e33e3.appspot.com",
+    messagingSenderId: "416035585421",
+    appId: "1:416035585421:web:225e18936e361f5999d1c4",
+    measurementId: "G-FPJBPZFZQM"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
 //----------------------------------------------------------------------------------------------------------------------
         var index=0;   //TO DO: PUT TAGS INTO ARRAY!!
         //var tags;
-        function writeDataWh() {
-            firebase.database().ref("Wholesome").push( {     
+        function writeData(cb) {
+            firebase.database().ref(cb).push( {     
                     Title: document.getElementById("Title").value,
                     Link: document.getElementById("Link").value
                 });
         }
-        function writeDataNtr() {
-            firebase.database().ref("NTR").push( {     
-                    Title: document.getElementById("Title").value,
-                    Link: document.getElementById("Link").value
-                });
-        }
-        function writeDataGa() {
-            firebase.database().ref("GoodArt").push( {     
-                    Title: document.getElementById("Title").value,
-                    Link: document.getElementById("Link").value
-                });
-        }
-        function writeDataOt() {
-            firebase.database().ref("Others").push( {     
-                    Title: document.getElementById("Title").value,
-                    Link: document.getElementById("Link").value
-                });
-        }
+
         function fetchData(){
           firebase.database().ref().once('value').then(function(snapshot){
                 snapshot.forEach(function(ChildSnapshot){          
@@ -112,14 +99,61 @@
     <input type="text" placeholder="Title" id="Title">
     <br>
     <input type="text" placeholder="Link/Code" id="Link">  
-    <br>    
-    <button onClick ="writeDataWh();reOnClick()">Wholesome</button>
-    <button onClick ="writeDataNtr();reOnClick()">Ntr</button>
-    <button onClick ="writeDataGa();reOnClick()">Good Art</button>
-    <button onClick ="writeDataOt();reOnClick()">Others</button>
+    <br>
+    <form>
+        <p style="font-size:50%;">    
+            <input type="radio" id="check1" value="Wholesome" onclick="cekCheck(this,id)">Wholesome</input>
+            <input type="radio" id="check2" value="Good art" onclick="cekCheck(this,id)">Good Art</input>
+            <input type="radio" id="check3" value="NTR" onclick="cekCheck(this,id)">NTR</input>
+            <input type="radio" id="check4" value="Others" onclick="cekCheck(this,id)">Others</input>
+        </p>
+    </form>
+    <script>
+function cekCheck(checkbox,id){
+var idHold1='';
+var idHold2='';
+var idHold3='';
+var idHold4='';
+var flag=true;
+    if(flag==true && id=='check1'){
+        idHold1=id;
+    }
+    if(flag==true && id=='check2'){
+        idHold2=id;
+    }
+    if(flag==true && id=='check3'){
+        idHold3=id;
+    }
+    if(flag==true && id=='check4'){
+        idHold4=id;
+    }
+var idFix=idHold1+idHold2+idHold3+idHold4;
+
+console.log(idFix);
+    checkboxes(idFix);
+}
+
+    let cb="";
+    function checkboxes(id){
+        var hold = document.getElementById(id).value;
+        console.log("hold: "+hold); //hold sudah bener
+        console.log("cb: "+cb);
+        console.log(cb.indexOf(hold))
+        if(cb==""){
+            cb=hold;
+        }
+        else{
+            if(cb!=hold && cb.indexOf(hold)==-1){   //bila ada kalimat dobel, ignore
+            cb=cb+" - "+hold;
+            }
+        }
+        console.log(cb);
+    }
+    console.log(cb);    //menjadikan judul
+    </script>    
+    <button onClick ="writeData(cb);reOnClick()">Submit</button>
     <br>
     </h1>
-    <!-- <p>Link: <strong id="linkPrint"></strong></p> -->
     <ul id="list"></ul> <!-- Print all Lists-->
     
 </body>
