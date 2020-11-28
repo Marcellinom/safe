@@ -22,6 +22,7 @@
     </style>
 </head>
 <body>
+<!------------------------------------------------------------------------------------------------------------------------->
 
  <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
@@ -46,31 +47,26 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
+  
 //----------------------------------------------------------------------------------------------------------------------
-        var index=0;   //TO DO: PUT TAGS INTO ARRAY!!
-        //var tags;
+
         function writeData(cb) {
             firebase.database().ref(cb).push( {     
                     Title: document.getElementById("Title").value,
                     Link: document.getElementById("Link").value
                 });
         }
-
         function fetchData(){
           firebase.database().ref().once('value').then(function(snapshot){
                 snapshot.forEach(function(ChildSnapshot){          
                 var tags=ChildSnapshot.key; // EXPERIMENT LATER!!
                 var isi=Object.keys(ChildSnapshot.val());
-
-                        // console.log(tags);
-                        // console.log(isi);
-                        // console.log(ChildSnapshot.val());
+                console.log("isi: "+isi)
+                    
                         isi.forEach(x => {
-                           // console.log(ChildSnapshot.val()[x]);
                             var listsTitle=ChildSnapshot.val()[x].Title;
+                            console.log("list title: "+listsTitle)
                             var listsLink=ChildSnapshot.val()[x].Link;
-                            // console.log(listsTitle);
-                            // console.log(listsLink);
                             
                             var ul=document.getElementById('list')
                             var Header=document.createElement('h2')
@@ -95,7 +91,6 @@
             });
         }
         fetchData();
-
         function reOnClick(){
             location.reload();
         }
@@ -110,56 +105,28 @@
     <br>
     <form>
         <p style="font-size:50%;">    
-            <input type="radio" id="check1" name='a' value="Wholesome" onclick="fillTags(id)">Wholesome</input>
-            <input type="radio" id="check2" name='b' value="Good art" onclick="fillTags(id)">Good Art</input>
-            <input type="radio" id="check3" name='c' value="NTR" onclick="fillTags(id)">NTR</input>
-            <input type="radio" id="check4" name='d' value="Others" onclick="fillTags(id)">Others</input>
+            <input type="checkbox" id="check1" name='a' value="Wholesome," onclick="fetchCb(this,id)">Wholesome</input>
+            <input type="checkbox" id="check2" name='b' value="Good art," onclick="fetchCb(this,id)">Good Art</input>
+            <input type="checkbox" id="check3" name='c' value="NTR," onclick="fetchCb(this,id)">NTR</input>
+            <input type="checkbox" id="check4" name='d' value="Others," onclick="fetchCb(this,id)">Others</input>
         </p>
     </form>
     <button class="clrBtn" onclick="clearTags()">Clear Tags</button><br><br>
     <script>
 
-    function fillTags(id){
-    var idHold1='';
-    var idHold2='';
-    var idHold3='';
-    var idHold4='';
-        if(id=='check1'){
-            idHold1=id;
-        }
-        if(id=='check2'){
-            idHold2=id;
-        }
-        if(id=='check3'){
-            idHold3=id;
-        }
-        if(id=='check4'){
-            idHold4=id;
-        }
-    var idFix=idHold1+idHold2+idHold3+idHold4;
-
-    console.log(idFix);
-        checkboxes(idFix);
-    }
-
     let cb="";
-    function checkboxes(id){
-        var hold = document.getElementById(id).value;
-        console.log("hold: "+hold); //hold sudah bener
-        console.log("cb: "+cb);
-        console.log(cb.indexOf(hold))
-        if(cb==""){
-            cb=hold;
+    function fetchCb(checkbox,id){
+    var hold = document.getElementById(id).value;
+
+    if(checkbox.checked==true){ //bila checkbox inactive, remove the value from header
+        if(cb!=hold && cb.indexOf(hold)==-1){   //bila ada kalimat dobel, ignore
+            cb=cb+" "+hold;
         }
-        else{
-            if(cb!=hold && cb.indexOf(hold)==-1){   //bila ada kalimat dobel, ignore
-            cb=cb+" - "+hold;
-            }
-        }
-        console.log(cb);
+    }else{
+            cb=cb.replace(hold,"");
     }
-    console.log(cb);    //menjadikan judul
-    
+    console.log("cb fix: "+cb);
+    }
     function clearTags(){
         document.getElementById("check1").checked=false;
         document.getElementById("check2").checked=false;
@@ -168,7 +135,7 @@
         cb="";
     }
     </script>    
-    <button onclick ="writeData(cb);reOnClick()"><p style="font-size:100%;"></p><strong>Submit</strong></p></button>
+    <button id="submit" onclick ="writeData(cb);reOnClick()"><p style="font-size:100%;"></p><strong>Submit</strong></p></button>
     <br>
     </h1>
     <ul id="list"></ul> <!-- Print all Lists-->
