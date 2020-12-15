@@ -6,51 +6,79 @@
     <!-- jQuery Library -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta itemprop="name" content="LinkSafe - Safe Link pekob lu">
+    <meta itemprop="name" content="Savelink - Safe Link Tugas lu">
+    <meta itemprop="description" content="development in progress...">
     <meta itemprop="image" content="https://cdn.discordapp.com/attachments/744789471609749570/767995001073303552/PicsArt_10-20-01.17.46.png">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="LinkSafe - Safe Link pekob lu">
+    <meta property="og:title" content="Savelink - Safe Link Tugas lu">
+    <meta itemprop="og:description" content="development in progress...">
     <meta property="og:image" content="https://cdn.discordapp.com/attachments/744789471609749570/767995001073303552/PicsArt_10-20-01.17.46.png">
     
+    <title>Marsellinked</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital@1&display=swap');
+    </style>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,600;0,700;1,400&display=swap');
         h1 {text-align: center;}
         p {text-align: center;}
-        button { 
-            height: 40px; 
-            width: 80px; 
-            } 
-        .clrBtn{
-            height:25px;
-            width:90px;
+        button {
+        background-color: rgb(10, 150, 17);
+        border-radius: 7px;
+        font-size: 20px;
+        color: rgb(255, 255, 255);
+        border: rgb(0, 0, 0);
+        width: 150px;
+        height: 50px; 
+        border: thin solid rgb(44, 44, 44);
         }
+        .clrBtn{
+            background-color: rgb(10, 150, 17);
+        border-radius: 7px;
+        width: 120px;
+        height: 35px;
+        }
+        body{
+            background: rgb(238,204,174);
+background: radial-gradient(circle, rgba(238,204,174,1) 15%, rgba(207,63,63,1) 95%);
+        };
+        .p1{
+            font-family: "Lucida Console", monospace;
+        }
+        .p2{
+            font-family: 'Kanit', sans-serif;
+        }
+}
     </style>
 </head>
 <body>
+    <bg>
 <!------------------------------------------------------------------------------------------------------------------------->
 
- <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
 
-    <script>
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-        apiKey: "AIzaSyBW3eNdDOur0AaOIb2t5pFelKoEGjgWOJ4",
-        authDomain: "linksafe-69.firebaseapp.com",
-        databaseURL: "https://linksafe-69.firebaseio.com",
-        projectId: "linksafe-69",
-        storageBucket: "linksafe-69.appspot.com",
-        messagingSenderId: "945067236274",
-        appId: "1:945067236274:web:fb5a4dbfd0e18043e3e2ab",
-        measurementId: "G-ZCWM2H6108"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
+<script>
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDZfAAZDSm52loYB3eHrHbMqb2-mDPPtUU",
+    authDomain: "linksave-e33e3.firebaseapp.com",
+    databaseURL: "https://linksave-e33e3.firebaseio.com",
+    projectId: "linksave-e33e3",
+    storageBucket: "linksave-e33e3.appspot.com",
+    messagingSenderId: "416035585421",
+    appId: "1:416035585421:web:225e18936e361f5999d1c4",
+    measurementId: "G-FPJBPZFZQM"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
   
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -71,16 +99,16 @@
                             var listsTitle=ChildSnapshot.val()[x].Title;
                             console.log("list title: "+listsTitle)
                             var listsLink=ChildSnapshot.val()[x].Link;
-                            
+                             
                             var ul=document.getElementById('list')
                             var Header=document.createElement('h2')
                             var _Title=document.createElement('li')
+
                             var hy=document.createElement('li')
-                            
+
                             var temp=listsLink;
                             var temps=temp.link(temp);
-                            if(temp>0&&temp<999999)
-                            var temps=temp.link("https://www.nhentai.net/g/"+temp);
+                            if(temp>0&&temp<999999){var temps=temp.link("https://www.nhentai.net/g/"+temp);}
                             console.log(temps);
                             Header.innerHTML=tags;
                             _Title.innerHTML=listsTitle;
@@ -88,31 +116,33 @@
                             ul.appendChild(Header); 
                             ul.appendChild(_Title);
                             ul.appendChild(hy);
-                            
+
                         })
                     }
                 );
             });
         }
+
         fetchData();
         function reOnClick(){
             location.reload();
         }
 
     </script>
-    
-    <h1>Save ur Precious Links!
+    <h1>
+        Save ur Precious Links!
     <br>
-    <input type="text" placeholder="Title" id="Title">
+    <img src="icon.png" width="230px" height="200px"><br>
+    <input type="text" placeholder="Title (optional)" id="Title">
     <br>
     <input type="text" placeholder="Link/Code" id="Link">  
     <br>
     <form>
         <p style="font-size:50%;">    
-            <input type="checkbox" id="check1" name='a' value="Wholesome," onclick="fetchCb(this,id)">Wholesome</input>
-            <input type="checkbox" id="check2" name='b' value="Good art," onclick="fetchCb(this,id)">Good Art</input>
-            <input type="checkbox" id="check3" name='c' value="NTR," onclick="fetchCb(this,id)">NTR</input>
-            <input type="checkbox" id="check4" name='d' value="Others," onclick="fetchCb(this,id)">Others</input>
+            <input type="checkbox" id="check1" name='a' value="Tugas," onclick="fetchCb(this,id)">Tugas</input>
+            <input type="checkbox" id="check2" name='b' value="Study Recources," onclick="fetchCb(this,id)">Study Recources</input>
+            <input type="checkbox" id="check3" name='c' value="Nuklir," onclick="fetchCb(this,id)">Nuklir</input>
+            <input type="checkbox" id="check4" name='d' value="Lainnya," onclick="fetchCb(this,id)">Lainnya</input>
         </p>
     </form>
     <button class="clrBtn" onclick="clearTags()">Clear Tags</button><br><br>
@@ -139,11 +169,11 @@
         cb="";
     }
     </script>    
-    <button id="submit" onclick ="writeData(cb);reOnClick()"><p style="font-size:100%;"></p><strong>Submit</strong></p></button>
-    <br>
+    <button id="submit" onclick ="writeData(cb);reOnClick()">Submit</button>
     </h1>
-    <ul id="list"></ul> <!-- Print all Lists-->
-    
+    <ul class="p2" id="list">
+    </ul> <!-- Print all Lists-->
+</bg>
 </body>
 </html>
 
